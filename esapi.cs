@@ -115,21 +115,21 @@ namespace esapi
             return list;
         }
 
-        public static List<StructureSet> sset_list_of_image_id_FOR(string id, string FOR, Patient pt)
+        public static List<StructureSet> sset_list_of_image_id_FOR(string image_id, string image_FOR, Patient pt)
         {
             List<StructureSet> list = new List<StructureSet>();
             foreach (StructureSet sset in pt.StructureSets)
             {
-                if (sset.Image.Id == id && sset.Image.FOR == FOR)
+                if (sset.Image.Id == image_id && sset.Image.FOR == image_FOR)
                     list.Add(sset);
             }
 
             return list;
         }
 
-        public static Structure find_or_add_s(string DicomType, string Id, StructureSet sset)
+        public static Structure find_or_add_s(string DicomType, string Id, StructureSet sset, bool case_sensitive= false)
         {
-            Structure s = s_of_id(Id, sset);
+            Structure s = s_of_id(Id, sset, case_sensitive);
             if (s != null)
                 return s;
 
@@ -142,6 +142,7 @@ namespace esapi
             return sset.AddStructure(DicomType, Id);
         }
 
+
         public static void s_clear_all_slices(Structure s, int num_slices)
         {
             for (int z = 0; z < num_slices; z++)
@@ -153,21 +154,25 @@ namespace esapi
         public static DoseValue s2D(string str)
         {
             string s_lower = str.ToLower().Trim();
-            if (s_lower.Contains("cgy"))
+            if (s_lower.Contains('%'))
             {
-                double dose = Convert.ToDouble(s_lower.Replace("cgy", ""));
-                return new DoseValue(dose, DoseValue.DoseUnit.cGy);
+                double value = Convert.ToDouble(s_lower.Replace("%", ""));
+                return new DoseValue(value, DoseValue.DoseUnit.Percent);
+            }
+            else if (s_lower.Contains("cgy"))
+            {
+                double value = Convert.ToDouble(s_lower.Replace("cgy", ""));
+                return new DoseValue(value, DoseValue.DoseUnit.cGy);
             }
             else if (s_lower.Contains("gy"))
             {
-                double dose = Convert.ToDouble(s_lower.Replace("gy", ""));
-                return new DoseValue(dose, DoseValue.DoseUnit.Gy);
+                double value = Convert.ToDouble(s_lower.Replace("gy", ""));
+                return new DoseValue(value, DoseValue.DoseUnit.Gy);
             }
             else
             {
                 throw new Exception("Invalid dose string:" + str);
             }
-
         }
         public static Structure s_of_id(string id, StructureSet sset, bool case_sensitive = true)
         {

@@ -91,7 +91,7 @@ namespace esapi
             }
         }
 
-        public static bool make_export_log = true;
+        public static bool make_export_log = false;
 
 
     }

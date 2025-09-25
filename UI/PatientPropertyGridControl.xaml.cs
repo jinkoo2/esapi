@@ -4,16 +4,16 @@ using esapi.ViewModel;
 
 namespace esapi.UI
 {
-    public partial class PatientControl : UserControl
+    public partial class PatientPropertyGridControl : UserControl
     {
-        public PatientControl()
+        public PatientPropertyGridControl()
         {
             InitializeComponent();
         }
 
         public void SetPatient(Patient patient)
         {
-            //MyPropertyGrid.SelectedObject = new PatientViewModel(patient);
+            PropertyGrid1.SelectedObject = new PatientViewModel(patient);
         }
     }
 }

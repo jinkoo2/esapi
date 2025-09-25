@@ -15,7 +15,7 @@ using VMS.TPS.Common.Model.Types;
 
 namespace esapi
 {
-    class exporter
+    public class exporter
     {
 
         public static void print(string msg)
