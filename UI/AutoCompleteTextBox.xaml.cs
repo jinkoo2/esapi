@@ -46,7 +46,18 @@ namespace esapi.UI
                 .ToList();
 
             SuggestionsListBox.ItemsSource = matches;
-            SuggestionsListBox.Visibility = matches.Any() ? Visibility.Visible : Visibility.Collapsed;
+
+
+            // 2. Control the Popup's state
+            if (SuggestionsPopup != null)
+            {
+                // Logic to determine if the popup should be open:
+                // Check if the filtered list has items AND the text box is focused
+                bool hasResults = SuggestionsListBox.Items.Count > 0;
+
+                // Set IsOpen property
+                SuggestionsPopup.IsOpen = hasResults;
+            }
         }
 
         private void SuggestionsListBox_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -55,10 +66,28 @@ namespace esapi.UI
             {
                 InputTextBox.Text = selected;
                 SelectedItem = selected;
-                SuggestionsListBox.Visibility = Visibility.Collapsed;
+
+                if (SuggestionsPopup != null && SuggestionsListBox.SelectedItem != null)
+                {
+                    // 1. Transfer the selected item text to the TextBox
+                    // InputTextBox.Text = SuggestionsListBox.SelectedItem.ToString();
+
+                    // 2. Close the popup
+                    SuggestionsPopup.IsOpen = false;
+                }
 
                 // Raise the event
                 SelectedItemChanged?.Invoke(this, selected);
+            }
+        }
+
+        private void SuggestionsListBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            // Check if the new focus target is inside the popup itself.
+            // If not, close the popup.
+            if (SuggestionsPopup != null && !SuggestionsPopup.IsKeyboardFocusWithin)
+            {
+                SuggestionsPopup.IsOpen = false;
             }
         }
     }
