@@ -37,13 +37,13 @@ namespace esapi.ViewModel
         [Category("Identification")]
         public string Name => _refPoint.Name;
 
-        [Category("Dose Limits (Gy)")]
+        [Category("Dose Limits")]
         public string DailyDoseLimit => _refPoint.DailyDoseLimit.ToString();
 
-        [Category("Dose Limits (Gy)")]
+        [Category("Dose Limits")]
         public string SessionDoseLimit => _refPoint.SessionDoseLimit.ToString();
 
-        [Category("Dose Limits (Gy)")]
+        [Category("Dose Limits")]
         public string TotalDoseLimit => _refPoint.TotalDoseLimit.ToString();
 
         [Category("Metadata")]

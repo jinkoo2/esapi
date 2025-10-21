@@ -13,7 +13,7 @@ namespace esapi.UI
 
         public void SetPatient(Patient patient)
         {
-            PropertyGrid1.SelectedObject = new PatientViewModel(patient);
+            //PropertyGrid1.SelectedObject = new PatientViewModel(patient);
         }
     }
 }

@@ -9,8 +9,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="450">
     <Grid>
+        <TextBlock> Patient View Model Here...</TextBlock>
+        <!--
         <WindowsFormsHost Name="WinFormsHost">
             <wf:PropertyGrid x:Name="PropertyGrid1"/>
         </WindowsFormsHost>
+        -->
     </Grid>
 </UserControl>

@@ -15,6 +15,7 @@ using VMSSeries = VMS.TPS.Common.Model.API.Series;
 using VMSRegistration = VMS.TPS.Common.Model.API.Registration;
 using VMSReferencePoint = VMS.TPS.Common.Model.API.ReferencePoint;
 using VMSHospital = VMS.TPS.Common.Model.API.Hospital;
+using VMSPlanSetup = VMS.TPS.Common.Model.API.PlanSetup;
 
 
 

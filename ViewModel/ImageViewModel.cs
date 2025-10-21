@@ -127,6 +127,13 @@ namespace esapi.ViewModel
         [Category("Geometry")]
         public int ZSize => _image.ZSize;
 
+        [Category("Geometry")]
+        public string SizeString => $"{XSize} x {YSize} x {ZSize}";
+
+        [Category("Geometry")]
+        public string ResolutionString => $"{XRes:F1} x {YRes:F1} x {ZRes:F1}";
+
+
         [Category("Status")]
         public bool IsProcessed => _image.IsProcessed;
 

@@ -394,6 +394,31 @@ namespace esapi
             return null;
         }
 
+        public static Beam add_setup_beam(ExternalPlanSetup ps, string beam_id, double g, VVector isocenter, ExternalBeamMachineParameters machine)
+        {
+            VRect<double> jawPositions = new VRect<double>(-50, -50, 50, 50);
+            double collimatorAngle = 0.0;
+            double patientSupportAngle = 0.0;
+            Beam b = ps.AddSetupBeam(machine, jawPositions, collimatorAngle, g, patientSupportAngle, isocenter);
+            b.Id = beam_id;
+
+            return b;
+        }
+
+        public static Beam add_bony_drr(Beam b)
+        {
+            // Bone window DRR
+            double drrSize = 500.0; //mm
+            double weight = 1.0;
+            double ctFrom = 125; // HU
+            double ctTo = 1000; // HU
+            double geoFrom = -1000; // mm
+            double geoTo = 1000; // mm
+            DRRCalculationParameters drrParam = new DRRCalculationParameters(drrSize, weight, ctFrom, ctTo, geoFrom, geoTo);
+            b.CreateOrReplaceDRR(drrParam);
+
+            return b;
+        }
 
     }
 }
